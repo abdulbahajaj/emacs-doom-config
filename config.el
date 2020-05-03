@@ -310,19 +310,27 @@
  ;; "]"
  "[" (lambda () (interactive) (vt-pusdh "..") (vt-ls))
  "]" (lambda () (interactive) (vt-popd) (vt-ls))
+ "o" (lambda () (interactive) (vt-ls))
+ "O" (lambda () (interactive) (vt-exec "ls"))
+
+ "d" (lambda () (interactive) (vt-insert-command "rm -rf "))
+ "D" (lambda () (interactive) (vt-insert-command "sudo rm -rf "))
+
  "<f15> H" (lambda () (interactive) (vt-cd-to "~") (vt-ls))
  "<f15> P" (lambda () (interactive) (vt-cd-to "~/projects") (vt-ls))
  "<f15> R" (lambda () (interactive) (vt-cd-to "~/repos") (vt-ls))
  "<f15> O" (lambda () (interactive) (vt-cd-to "~/org") (vt-ls))
  "<f15> B" (lambda () (interactive) (vt-cd-to "~/books") (vt-ls))
  "<f15> S" (lambda () (interactive) (vt-cd-to "~/scrap") (vt-ls))
+
  "<f13> <f13>" 'vterm-send-C-c
  "r" 'vt-source-zshrc)
 
 (general-define-key
  :states '(insert)
  :keymaps 'vterm-mode-map
- "<f15>" 'my-vterm-normal-mode
+ "<f15> c" 'my-vterm-normal-mode
+ "<f15> s" 'vt-add-sudo
  "S-<return>" 'vterm-run-and-go-up
  "M-<f13>" 'vt-rc
  "<f13>" 'vterm-send-C-c
@@ -371,8 +379,21 @@
   (vt-exec
    (format "popd")))
 
+(defun vt-insert-command (cmd)
+    (vterm-send-string cmd)
+    (evil-insert 1))
+
 (defun vt-ls ()
     (vt-exec "ls -la"))
+
+(defun vt-add-sudo ()
+  (interactive)
+    (vterm-send-escape)
+    (vterm-send-string "0")
+    (vterm-send-string "i")
+    (vterm-send-string "sudo ")
+    (vterm-send-escape)
+    (vterm-send-string "$"))
 
 (defun vt-rc ()
   (interactive)
