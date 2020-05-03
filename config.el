@@ -308,10 +308,14 @@
  :states 'normal
  :keymaps 'vterm-mode-map
  ;; "]"
+ "{" (lambda () (interactive) (vt-pusdh "..") (vt-exec "ls"))
+ "}" (lambda () (interactive) (vt-popd) (vt-exec "ls"))
  "[" (lambda () (interactive) (vt-pusdh "..") (vt-ls))
  "]" (lambda () (interactive) (vt-popd) (vt-ls))
  "o" (lambda () (interactive) (vt-ls))
  "O" (lambda () (interactive) (vt-exec "ls"))
+ "c" (lambda () (interactive) (vt-insert-command "cd "))
+ "C" (lambda () (interactive) (vt-insert-command "cat "))
 
  "d" (lambda () (interactive) (vt-insert-command "rm -rf "))
  "D" (lambda () (interactive) (vt-insert-command "sudo rm -rf "))
@@ -389,11 +393,13 @@
 (defun vt-add-sudo ()
   (interactive)
     (vterm-send-escape)
-    (vterm-send-string "0")
-    (vterm-send-string "i")
+    (vterm-send-string "m")
+    (vterm-send-string "p")
+    (vterm-send-string "0i")
     (vterm-send-string "sudo ")
     (vterm-send-escape)
-    (vterm-send-string "$"))
+    (vterm-send-string "`plllll")
+    (vterm-send-string "a"))
 
 (defun vt-rc ()
   (interactive)
