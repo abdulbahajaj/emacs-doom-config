@@ -52,11 +52,11 @@
        (nbutlast (split-string p "/") 1))))
 
 (defun my-open-neotree-at-root () (interactive)
-  (neo-global--open-dir
-    (or (doom-project-root)
-        (my-filename-to-dir-path buffer-file-name)
-        (dired-current-directory))))
-       ;; (neo-global--open-dir (or buffer-file-name (dired-current-directory))))
+       (neo-global--open-dir
+        (or (doom-project-root)
+            (my-filename-to-dir-path buffer-file-name)
+            (dired-current-directory))))
+;; (neo-global--open-dir (or buffer-file-name (dired-current-directory))))
 
 
 
@@ -65,60 +65,60 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (general-nmap
-    "e" 'evil-embrace-evil-surround-region
-    "z g" 'evil-scroll-line-to-bottom
-    "r"  'undo-tree-redo
-    "-"  'counsel-M-x
- 
-    ;; In Buffer movement
-    "J"  (lambda () (interactive) (evil-next-line 10))
-    "K"  (lambda () (interactive) (evil-previous-line 10))
-    "L"  (lambda () (interactive) (right-char 10))
-    "H"  (lambda () (interactive) (left-char 10))
-    "l"  'right-char
-    "h"  'left-char
+  "e" 'evil-embrace-evil-surround-region
+  "z g" 'evil-scroll-line-to-bottom
+  "r"  'undo-tree-redo
+  "-"  'counsel-M-x
 
-    ;; tabs
-    ;; "<SPC> 1" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 1))
-    ;; "<SPC> 2" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 2))
-    ;; "<SPC> 3" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 3))
-    ;; "<SPC> 4" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 4))
-    ;; "<SPC> 5" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 5))
-    ;; "<SPC> 6" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 6))
-    ;; "<SPC> 7" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 7))
-    ;; "<SPC> 8" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 8))
-    ;; "<SPC> 9" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 9))
-    ;; "<f14> g" 'centaur-tabs-toggle-groups
-    ;; "<f13> t" 'centaur-tabs-mode
+  ;; In Buffer movement
+  "J"  (lambda () (interactive) (evil-next-line 10))
+  "K"  (lambda () (interactive) (evil-previous-line 10))
+  "L"  (lambda () (interactive) (right-char 10))
+  "H"  (lambda () (interactive) (left-char 10))
+  "l"  'right-char
+  "h"  'left-char
 
-    ;; other
-    "M-b" 'evil-buffer-new
-    "<f14> t" '+vterm/here
-    "<f14> T" 'evil-collection-vterm-toggle-send-escape
-    "<f14> s" 'save-buffer
-    "<f14> d" '+doom-dashboard/open
-    "<SPC> z" (lambda () (interactive) (evil-edit "."))
-    "<f14> h" 'hs-hide-level
-    "<f14> <f14>" '+default/search-project
-    "<f14> P" 'proced
-    "<f14> p" 'helm-top
-    "<f14> 3" 'swiper-isearch-thing-at-point
-    "<f14> f" 'helm-google-suggest
-    "<f14> F" '+lookup/online-select
-    "<f14> c" 'org-goto-calendar
-    "<f14> C" '=calendar
-    "<f14> M-c" 'org-date-from-calendar
-    "<f14> l" 'magit-log-all
-    "<f14> b" 'ibuffer
-    "<f14> e" '+eshell/here
-    "<f14> m" 'my/make-run
-    "<f14> r" 'rename-buffer
-    ;; "<f14> z" 'my-open-neotree-at-root
-    "<f14> z" '+neotree/open
-    "<f14> <f1> c" 'org-schedule
-    "S-<SPC> <SPC>" 'counsel-locate
-    ;; "<f1>" 'org-agenda
-    "<f12>" 'switch-window)
+  ;; tabs
+  ;; "<SPC> 1" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 1))
+  ;; "<SPC> 2" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 2))
+  ;; "<SPC> 3" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 3))
+  ;; "<SPC> 4" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 4))
+  ;; "<SPC> 5" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 5))
+  ;; "<SPC> 6" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 6))
+  ;; "<SPC> 7" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 7))
+  ;; "<SPC> 8" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 8))
+  ;; "<SPC> 9" (lambda () (interactive) (centaur-tabs-select-visible-nth-tab 9))
+  ;; "<f14> g" 'centaur-tabs-toggle-groups
+  ;; "<f13> t" 'centaur-tabs-mode
+
+  ;; other
+  "M-b" 'evil-buffer-new
+  "<f14> t" '+vterm/here
+  "<f14> T" 'evil-collection-vterm-toggle-send-escape
+  "<f14> s" 'save-buffer
+  "<f14> d" '+doom-dashboard/open
+  "<SPC> z" (lambda () (interactive) (evil-edit "."))
+  "<f14> h" 'hs-hide-level
+  "<f14> <f14>" '+default/search-project
+  "<f14> P" 'proced
+  "<f14> p" 'helm-top
+  "<f14> 3" 'swiper-isearch-thing-at-point
+  "<f14> f" 'helm-google-suggest
+  "<f14> F" '+lookup/online-select
+  "<f14> c" 'org-goto-calendar
+  "<f14> C" '=calendar
+  "<f14> M-c" 'org-date-from-calendar
+  "<f14> l" 'magit-log-all
+  "<f14> b" 'ibuffer
+  "<f14> e" '+eshell/here
+  "<f14> m" 'my/make-run
+  "<f14> r" 'rename-buffer
+  ;; "<f14> z" 'my-open-neotree-at-root
+  "<f14> z" '+neotree/open
+  "<f14> <f1> c" 'org-schedule
+  "S-<SPC> <SPC>" 'counsel-locate
+  ;; "<f1>" 'org-agenda
+  "<f12>" 'switch-window)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -128,44 +128,44 @@
 ;; split creation and navigation
 (defun my-split-window (pos)
   (cond
-    ((string= pos "right")
-      (progn
-        (split-window-horizontally)
-        (evil-window-right 1)))
-    ((string= pos "left")
-      (split-window-horizontally))
-    ((string= pos "up")
-      (split-window-vertically))
-    ((string= pos "down")
-      (progn
-        (split-window-vertically)
-        (evil-window-down 1)))))
+   ((string= pos "right")
+    (progn
+      (split-window-horizontally)
+      (evil-window-right 1)))
+   ((string= pos "left")
+    (split-window-horizontally))
+   ((string= pos "up")
+    (split-window-vertically))
+   ((string= pos "down")
+    (progn
+      (split-window-vertically)
+      (evil-window-down 1)))))
 
 
 (general-nmap
-    ;; Resizing
-    "+" 'evil-window-increase-width
-    "_" 'evil-window-decrease-width
-    "M-=" 'evil-window-increase-height
-    "M--" 'evil-window-decrease-height
+  ;; Resizing
+  "+" 'evil-window-increase-width
+  "_" 'evil-window-decrease-width
+  "M-=" 'evil-window-increase-height
+  "M--" 'evil-window-decrease-height
 
-    ;; split navigation
-    "<down>" 'evil-window-down
-    "<left>" 'evil-window-left
-    "<up>" 'evil-window-up
-    "<right>" 'evil-window-right
+  ;; split navigation
+  "<down>" 'evil-window-down
+  "<left>" 'evil-window-left
+  "<up>" 'evil-window-up
+  "<right>" 'evil-window-right
 
-    ;; moving windows
-    "<f13> <right>" #'+evil/window-move-right
-    "<f13> <up>" #'+evil/window-move-up
-    "<f13> <left>" #'+evil/window-move-left
-    "<f13> <down>" #'+evil/window-move-down
- 
-    ;; split creation
-    "<SPC> <right>" (lambda () (interactive) (my-split-window "right"))
-    "<SPC> <up>" (lambda () (interactive) (my-split-window "up"))
-    "<SPC> <left>" (lambda () (interactive) (my-split-window "left"))
-    "<SPC> <down>" (lambda () (interactive) (my-split-window "down")))
+  ;; moving windows
+  "<f13> <right>" #'+evil/window-move-right
+  "<f13> <up>" #'+evil/window-move-up
+  "<f13> <left>" #'+evil/window-move-left
+  "<f13> <down>" #'+evil/window-move-down
+
+  ;; split creation
+  "<SPC> <right>" (lambda () (interactive) (my-split-window "right"))
+  "<SPC> <up>" (lambda () (interactive) (my-split-window "up"))
+  "<SPC> <left>" (lambda () (interactive) (my-split-window "left"))
+  "<SPC> <down>" (lambda () (interactive) (my-split-window "down")))
 
 
 
@@ -198,23 +198,23 @@
 (create-folder-nmap "<f15> O" ~/org              )
 
 (general-nmap
-    ;;files/directory management
-    ;; "<f15> P" (lambda () (interactive) (cd "~/projects/"))
-    ;; "<f15> S" (lambda () (interactive) (cd "~/scrap/"))
-    ;; "<f15> R" (lambda () (interactive) (cd "~/repos/"))
-    "<f15> l" (lambda () (interactive) (evil-edit "~/org/timeline.org"))
-    "<f15> i" (lambda () (interactive) (evil-edit "~/org/triage.org"))
-    "<f15> t" (lambda () (interactive) (evil-edit "~/org/todo.org"))
-    "<f15> g" (lambda () (interactive) (evil-edit "~/org/gist.org"))
-    "<f15> n" (lambda () (interactive) (evil-edit "~/org/notes.org"))
-    "<f15> s" (lambda () (interactive) (evil-edit "~/org/scrap.org"))
-    "<f15> r" (lambda () (interactive) (evil-edit "~/.zshrc"))
-    "<f15> p" (lambda () (interactive) (evil-edit "~/org/projects.org"))
-    "<f15> b" (lambda () (interactive) (evil-edit "~/org/books.org"))
-    ;; "<f15> P" 'goto-raspberry-pi
+  ;;files/directory management
+  ;; "<f15> P" (lambda () (interactive) (cd "~/projects/"))
+  ;; "<f15> S" (lambda () (interactive) (cd "~/scrap/"))
+  ;; "<f15> R" (lambda () (interactive) (cd "~/repos/"))
+  "<f15> l" (lambda () (interactive) (evil-edit "~/org/timeline.org"))
+  "<f15> i" (lambda () (interactive) (evil-edit "~/org/triage.org"))
+  "<f15> t" (lambda () (interactive) (evil-edit "~/org/todo.org"))
+  "<f15> g" (lambda () (interactive) (evil-edit "~/org/gist.org"))
+  "<f15> n" (lambda () (interactive) (evil-edit "~/org/notes.org"))
+  "<f15> s" (lambda () (interactive) (evil-edit "~/org/scrap.org"))
+  "<f15> r" (lambda () (interactive) (evil-edit "~/.zshrc"))
+  "<f15> p" (lambda () (interactive) (evil-edit "~/org/projects.org"))
+  "<f15> b" (lambda () (interactive) (evil-edit "~/org/books.org"))
+  ;; "<f15> P" 'goto-raspberry-pi
 
-    "<f15> c" (lambda () (interactive) (evil-edit "~/.doom.d/config.el"))
-)
+  "<f15> c" (lambda () (interactive) (evil-edit "~/.doom.d/config.el"))
+  )
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -232,12 +232,12 @@
              "|"
              "DONE(d)"
              "KILL(k)"))
-        org-todo-keyword-faces
-        '(("[-]"  . +org-todo-active)
-          ("STARTED" . +org-todo-active)
-          ("[?]"  . +org-todo-onhold)
-          ("BLOCKED" . +org-todo-onhold)
-          ("ON-GOING" . +org-todo-active)))
+          org-todo-keyword-faces
+          '(("[-]"  . +org-todo-active)
+            ("STARTED" . +org-todo-active)
+            ("[?]"  . +org-todo-onhold)
+            ("BLOCKED" . +org-todo-onhold)
+            ("ON-GOING" . +org-todo-active)))
     (set-face-attribute 'org-level-1 nil :weight 'ultra-light  :height 1.2 :foreground "#ebe8e8" :background "#1f1f1f" )
     ;; (set-face-attribute 'org-level-2 nil :box '(:line-width 1 :color "#0d352c") :weight 'ultra-light :height 1.1 :foreground "#34ace0" :background "#0d352c");"#181835");;"#1f1f3f");;"#0d3028")
     ;; (set-face-attribute 'org-level-3 nil  :weight 'ultra-light :height 1.05 :foreground "#aaa69d" )
@@ -247,8 +247,8 @@
 ;;   :hook (org-mode . org-fancy-priorities-mode)
 ;;   :config (setq
 ;;            org-bullets-bullet-list '("⁂")
-           ;; org-todo-keyword-faces '(("TODO" :foreground "#f7d794" underline t))
-           ;; org-fancy-priorities-list '("|||" "|| " "|  ")))
+;; org-todo-keyword-faces '(("TODO" :foreground "#f7d794" underline t))
+;; org-fancy-priorities-list '("|||" "|| " "|  ")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; vterm specific bindings
@@ -268,9 +268,9 @@
       (switch-to-buffer buffer))))
 
 (defun vterm-run-and-go-up ()
-    (interactive)
-    (vterm-send-return)
-    (vterm-send-up))
+  (interactive)
+  (vterm-send-return)
+  (vterm-send-up))
 
 (defun my-vterm-normal-mode ()
   (interactive)
@@ -293,26 +293,40 @@
   (vterm-clear))
 
 (general-define-key
-  :states '(normal)
-  :keymaps 'vterm-copy-mode-map
-  "a" 'my-vterm-append
-  "i" 'my-vterm-insert)
+ :states '(normal)
+ :keymaps 'vterm-copy-mode-map
+ "a" 'my-vterm-append
+ "i" 'my-vterm-insert)
 
 (general-define-key
-    :states 'normal
-    :keymaps 'vterm-mode-map
-    "r" 'vt-source-zshrc)
-
+ :states '(normal insert)
+ :keymaps 'vterm-mode-map
+ "<f1>" 'my-vterm-clear
+)
 
 (general-define-key
-  :states '(insert)
-  :keymaps 'vterm-mode-map
-  "<f15>" 'my-vterm-normal-mode
-  "S-<return>" 'vterm-run-and-go-up
-  "<f1>" 'my-vterm-clear
-  "M-<f13>" 'vt-rc
-  "<f13>" 'vterm-send-C-c
-  "<f14>" 'vterm-send-escape)
+ :states 'normal
+ :keymaps 'vterm-mode-map
+ ;; "]"
+ "[" (lambda () (interactive) (vt-pusdh "..") (vt-ls))
+ "]" (lambda () (interactive) (vt-popd) (vt-ls))
+ "<f15> H" (lambda () (interactive) (vt-cd-to "~") (vt-ls))
+ "<f15> P" (lambda () (interactive) (vt-cd-to "~/projects") (vt-ls))
+ "<f15> R" (lambda () (interactive) (vt-cd-to "~/repos") (vt-ls))
+ "<f15> O" (lambda () (interactive) (vt-cd-to "~/org") (vt-ls))
+ "<f15> B" (lambda () (interactive) (vt-cd-to "~/books") (vt-ls))
+ "<f15> S" (lambda () (interactive) (vt-cd-to "~/scrap") (vt-ls))
+ "<f13> <f13>" 'vterm-send-C-c
+ "r" 'vt-source-zshrc)
+
+(general-define-key
+ :states '(insert)
+ :keymaps 'vterm-mode-map
+ "<f15>" 'my-vterm-normal-mode
+ "S-<return>" 'vterm-run-and-go-up
+ "M-<f13>" 'vt-rc
+ "<f13>" 'vterm-send-C-c
+ "<f14>" 'vterm-send-escape)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -320,8 +334,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun vt-exec (str)
-    (vterm-send-string str)
-    (vterm-send-return))
+  (vterm-send-string str)
+  (vterm-send-return))
 
 (defun vt-eq (key val)
   (vt-exec
@@ -343,6 +357,22 @@
 (defun vt-source-zshrc ()
   (interactive)
   (vt-exec "source ~/.zshrc"))
+
+(defun vt-cd-to (path)
+  (interactive)
+  (vt-exec
+   (format "cd %s" path)))
+
+(defun vt-pusdh (path)
+  (vt-exec
+   (format "pushd %s" path)))
+
+(defun vt-popd ()
+  (vt-exec
+   (format "popd")))
+
+(defun vt-ls ()
+    (vt-exec "ls -la"))
 
 (defun vt-rc ()
   (interactive)
@@ -381,18 +411,18 @@
             (setq answer (+ (expt 10 field-width) answer)))
           (replace-match (format (concat "%0" (int-to-string field-width) "d")
                                  answer)))))))
-   
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Macros
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (fset 'mcs/lisp-insert-title
-   [?4 ?5 ?a ?\; ?\; escape ?y ?y ?p ?p ?k ?l ?l ?l ?l ?l ?l ?h ?h ?d ?$ ?a ?  ?q backspace escape])
+      [?4 ?5 ?a ?\; ?\; escape ?y ?y ?p ?p ?k ?l ?l ?l ?l ?l ?l ?h ?h ?d ?$ ?a ?  ?q backspace escape])
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Removign yanking when deleting stuff
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 
+
 ;; Remove yank from delete
 (evil-define-operator evil-delete (beg end type register yank-handler)
   "Delete text from BEG to END with TYPE.
