@@ -1,25 +1,66 @@
 ;;; .doom.d/config.el -*- lexical-binding: t; -*-
+;;;
 ;; Author: Abdul Bahajaj <abdulbahajaj@gmail.com>
-
 
 (require 'general)
 (general-evil-setup)
 
+;; Some functionality uses this to identify you, e.g. GPG configuration, email
+;; clients, file templates and snippets.
+(setq user-full-name "Abdul Bahajaj"
+      user-mail-address "abdulbahajaj@gmail.com")
+
+;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
+;; are the three important ones:
+;;
+;; + `doom-font'
+;; + `doom-variable-pitch-font'
+;; + `doom-big-font' -- used for `doom-big-font-mode'; use this for
+;;   presentations or streaming.
+;;
+;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
+;; font string. You generally only need these two:
+(setq doom-font (font-spec :family "monospace" :size 14))
+
+;; There are two ways to load a theme. Both assume the theme is installed and
+;; available. You can either set `doom-theme' or manually load a theme with the
+;; `load-theme' function. This is the default:
+;; (setq doom-theme 'doom-tomorrow-night)
+;; (setq doom-theme 'doom-spacegrey)
+
+(load-theme 'doom-tomorrow-night)
+
+;; If you use `org' and don't want your org files in the default location below,
+;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/org/")
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type t)
+
+   ;; (set-foreground-color "#000")
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; General configuration
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq +ivy-buffer-preview t)
 
 (setq display-line-numbers-type 'relative)
-
 (setq explicit-shell-file-name "/bin/zsh")
 
 (setq org-use-property-inheritance t)
 
+(display-battery-mode t)
 (display-time-mode t)
 
 (setq show-paren-style 'parenthesis)
 
+;; (with-eval-after-load 'show-paren-match
 (set-face-attribute 'show-paren-match nil :background "#FFFF00")
+
+;; (set-face-attribute 'sp- nil :background "#FFFF00")
 
 (with-eval-after-load 'hl-line
   (set-face-attribute 'hl-line nil :background "#333333"))
@@ -34,7 +75,6 @@
 
 (setq indent-line-function 'insert-tab)
 
-(display-battery-mode t)
 
 (global-set-key (kbd "<f1>") nil)
 (global-set-key (kbd "<f12>") nil)
@@ -238,21 +278,33 @@
             ("[?]"  . +org-todo-onhold)
             ("BLOCKED" . +org-todo-onhold)
             ("ON-GOING" . +org-todo-active)))
-    (set-face-attribute 'org-level-1 nil :weight 'ultra-light  :height 1.2 :foreground "#ebe8e8" :background "#1f1f1f" )
+    ;; (set-face-attribute 'org-level-1 nil :weight 'ultra-light  :height 1.2 :foreground "#ebe8e8" :background "#1f1f1f" )
     ;; (set-face-attribute 'org-level-2 nil :box '(:line-width 1 :color "#0d352c") :weight 'ultra-light :height 1.1 :foreground "#34ace0" :background "#0d352c");"#181835");;"#1f1f3f");;"#0d3028")
     ;; (set-face-attribute 'org-level-3 nil  :weight 'ultra-light :height 1.05 :foreground "#aaa69d" )
     ))
 
-;; (use-package! org-fancy-priorities
-;;   :hook (org-mode . org-fancy-priorities-mode)
-;;   :config (setq
-;;            org-bullets-bullet-list '("⁂")
-;; org-todo-keyword-faces '(("TODO" :foreground "#f7d794" underline t))
-;; org-fancy-priorities-list '("|||" "|| " "|  ")))
+(use-package! org-fancy-priorities
+  :hook (org-mode . org-fancy-priorities-mode)
+  :config (setq
+           org-bullets-bullet-list '("⁂")
+org-todo-keyword-faces '(("TODO" :foreground "#f7d794" underline t))
+org-fancy-priorities-list '("|||" "|| " "|  ")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; vterm specific bindings
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ;; d
+;; ;; D
+;; e
+;; r
+;; R
+;; u
+;; ;; o
+;; ;; O
+;;;;  x
+;; ;; X
+
+(dirtrack-mode)
 
 (defun vterm-send-escape()
   (interactive)
@@ -302,12 +354,22 @@
  :states '(normal insert)
  :keymaps 'vterm-mode-map
  "<f1>" 'my-vterm-clear
-)
+ "<f15> e" (lambda () (interactive) (vt-insert-command "echo "))
+ "<f15> x" 'vt-add-chmod
+ "<f15> c" 'vterm-copy-mode-map
+ "<f15> s" 'vt-add-sudo
+ "<f15> H" (lambda () (interactive) (vt-cd-to "~") (vt-ls))
+ "<f15> P" (lambda () (interactive) (vt-cd-to "~/projects") (vt-ls))
+ "<f15> e" (lambda () (interactive) (vt-insert-command "echo "))
+ "<f15> R" (lambda () (interactive) (vt-cd-to "~/repos") (vt-ls))
+ "<f15> O" (lambda () (interactive) (vt-cd-to "~/org") (vt-ls))
+ "<f15> B" (lambda () (interactive) (vt-cd-to "~/books") (vt-ls))
+ "<f15> S" (lambda () (interactive) (vt-cd-to "~/scrap") (vt-ls)))
 
 (general-define-key
  :states 'normal
  :keymaps 'vterm-mode-map
- ;; "]"
+
  "{" (lambda () (interactive) (vt-pusdh "..") (vt-exec "ls"))
  "}" (lambda () (interactive) (vt-popd) (vt-exec "ls"))
  "[" (lambda () (interactive) (vt-pusdh "..") (vt-ls))
@@ -317,24 +379,21 @@
  "c" (lambda () (interactive) (vt-insert-command "cd "))
  "C" (lambda () (interactive) (vt-insert-command "cat "))
 
- "d" (lambda () (interactive) (vt-insert-command "rm -rf "))
- "D" (lambda () (interactive) (vt-insert-command "sudo rm -rf "))
+ "x" (lambda () (interactive) (vt-insert-command "rm -rf "))
+ "X" (lambda () (interactive) (vt-insert-command "sudo rm -rf "))
 
- "<f15> H" (lambda () (interactive) (vt-cd-to "~") (vt-ls))
- "<f15> P" (lambda () (interactive) (vt-cd-to "~/projects") (vt-ls))
- "<f15> R" (lambda () (interactive) (vt-cd-to "~/repos") (vt-ls))
- "<f15> O" (lambda () (interactive) (vt-cd-to "~/org") (vt-ls))
- "<f15> B" (lambda () (interactive) (vt-cd-to "~/books") (vt-ls))
- "<f15> S" (lambda () (interactive) (vt-cd-to "~/scrap") (vt-ls))
+ "d" (lambda () (interactive) (vt-insert-command "mkdir "))
+ "D" (lambda () (interactive) (vt-insert-command "touch "))
 
  "<f13> <f13>" 'vterm-send-C-c
- "r" 'vt-source-zshrc)
+
+ ;; "r" (lambda () (interactive))
+ "R" 'vt-source-zshrc)
 
 (general-define-key
- :states '(insert)
+ :states 'insert
  :keymaps 'vterm-mode-map
- "<f15> c" 'my-vterm-normal-mode
- "<f15> s" 'vt-add-sudo
+
  "S-<return>" 'vterm-run-and-go-up
  "M-<f13>" 'vt-rc
  "<f13>" 'vterm-send-C-c
@@ -390,16 +449,38 @@
 (defun vt-ls ()
     (vt-exec "ls -la"))
 
+(defun vt-clear-current-command ()
+  (vterm-send-escape)
+  (vterm-send-string "dd")
+  (vterm-send-string "i"))
+
+(defun vt-insert-at-start (cmd) ;; requires vi mode
+  (vterm-send-escape)
+  (vterm-send-string "m")
+  (vterm-send-string "p")
+  (vterm-send-string "0i")
+  (vterm-send-string cmd)
+  (vterm-send-escape)
+  (vterm-send-string "`p")
+  (let ((cmd-size (length cmd))
+        (cursor 0))
+    (while (< cursor cmd-size)
+      (vterm-send-string "l")
+      (setq cursor (+ cursor 1))))
+  (vterm-send-string "a"))
+
+(defun vt-inset-at-point (cmd)
+  (vterm-send-escape)
+  (vterm-send-string "i")
+  (vterm-send-string cmd))
+
 (defun vt-add-sudo ()
+    (interactive)
+    (vt-insert-at-start "sudo "))
+
+(defun vt-add-chmod ()
   (interactive)
-    (vterm-send-escape)
-    (vterm-send-string "m")
-    (vterm-send-string "p")
-    (vterm-send-string "0i")
-    (vterm-send-string "sudo ")
-    (vterm-send-escape)
-    (vterm-send-string "`plllll")
-    (vterm-send-string "a"))
+  (vt-insert-at-start "chmod u+x "))
 
 (defun vt-rc ()
   (interactive)
@@ -439,12 +520,14 @@
           (replace-match (format (concat "%0" (int-to-string field-width) "d")
                                  answer)))))))
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Macros
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (fset 'mcs/lisp-insert-title
       [?4 ?5 ?a ?\; ?\; escape ?y ?y ?p ?p ?k ?l ?l ?l ?l ?l ?l ?h ?h ?d ?$ ?a ?  ?q backspace escape])
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Removign yanking when deleting stuff
@@ -498,6 +581,7 @@ Save in REGISTER or in the kill-ring with YANK-HANDLER."
     (evil-set-register ?- (filter-buffer-substring beg end))
     ;; (evil-yank beg end type register)
     (org-delete-char count)))
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Old code

@@ -6,7 +6,7 @@
 ;; (package! another-package :recipe (:host github :repo "username/repo"))
 ;; (package! builtin-package :disable t)
 
-;; (package! ob-async)
+(package! ob-async)
 
 ;; If you want to pull in the Evil compatibility package.
 

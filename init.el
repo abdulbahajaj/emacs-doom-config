@@ -15,7 +15,7 @@
        :completion
        company           ; the ultimate code completion backend
        helm              ; the *other* search engine for love and life
-       ;;ido             ; the other *other* search engine...
+       ido             ; the other *other* search engine...
        ivy               ; a search engine for love and life
 
        :ui
@@ -61,6 +61,8 @@
        dired             ; making dired pretty [functional]
        electric          ; smarter, keyword-based electric-indent
        vc                ; version-control and Emacs, sitting in a tree
+       undo              ; persistent, smarter undo for your inevitable mistakes
+       ibuffer         ; interactive buffer management
 
        :term
        eshell            ; a consistent, cross-platform shell (WIP)
