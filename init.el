@@ -70,6 +70,11 @@
        term              ; terminals in Emacs
        vterm             ; another terminals in Emacs
 
+       :checkers
+       syntax            ; tasing you for every semicolon you forget
+       spell             ; tasing you for misspelling mispelling
+       grammar           ; tasing grammar mistake every you make
+
        :tools
        ansible
        ;;debugger          ; FIXME stepping through code, to help you add bugs
@@ -78,7 +83,7 @@
        ;;editorconfig      ; let someone else argue about tabs vs spaces
        ;;ein               ; tame Jupyter notebooks with emacs
        eval              ; run code, run (also, repls)
-       flycheck          ; tasing you for every semicolon you forget
+       ;; flycheck          ; tasing you for every semicolon you forget
        ;;flyspell          ; tasing you for misspelling mispelling
        ;;gist              ; interacting with github gists
        (lookup           ; helps you navigate your code and documentation
@@ -155,9 +160,9 @@
        ;;vala              ; GObjective-C
 
        :email
-       ;;(mu4e +gmail)       ; WIP
-       ;;notmuch             ; WIP
-       ;;(wanderlust +gmail) ; WIP
+       ;; (mu4e +gmail)       ; WIP
+       ;; notmuch             ; WIP
+       ;; (wanderlust +gmail) ; WIP
 
        ;; Applications are complex and opinionated modules that transform Emacs
        ;; toward a specific purpose. They may have additional dependencies and
@@ -165,11 +170,11 @@
        :app
        calendar
        ;;irc               ; how neckbeards socialize
-       ;;(rss +org)        ; emacs as an RSS reader
+       (rss +org)        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
-       ;;(write            ; emacs for writers (fiction, notes, papers, etc.)
-       ;; +wordnut         ; wordnet (wn) search
-       ;; +langtool)       ; a proofreader (grammar/style check) for Emacs
+       (write            ; emacs for writers (fiction, notes, papers, etc.)
+       +wordnut         ; wordnet (wn) search
+       +langtool)       ; a proofreader (grammar/style check) for Emacs
 
        :config
        ;; For literate config users. This will tangle+compile a config.org
@@ -180,19 +185,3 @@
        ;; provides a Spacemacs-inspired keybinding scheme and a smartparens
        ;; config. Use it as a reference for your own modules.
        (default +bindings +smartparens))
-
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(custom-enabled-themes (quote (doom-tomorrow-night)))
-;;  '(custom-safe-themes
-;;    (quote
-;;     ("79bdfb7b0830e134cfe93532f5da4d01f864787e885caf4faec10f614fbbebdc" "0fe9f7a04e7a00ad99ecacc875c8ccb4153204e29d3e57e9669691e6ed8340ce" default))))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(org-document-title ((t (:foreground "#81a2be" :underline "dark blue" :weight bold :height 1.0 :width expanded)))))
